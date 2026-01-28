@@ -1,0 +1,63 @@
+:root {
+  --background: #f0f2f5;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --border: #e5e7eb;
+  --icon-color: #9ca3af;
+  --icon-hover-bg: #e5e7eb;
+  --tab-bg: #ffffff;
+  --tab-active-bg: #e5e7eb;
+  --scrollbar-thumb: #c1c1c1;
+  --scrollbar-track: #f1f1f1;
+}
+
+[data-theme='dark'] {
+  --background: #111827;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --primary: #60a5fa;
+  --primary-hover: #3b82f6;
+  --border: #374151;
+  --icon-color: #6b7280;
+  --icon-hover-bg: #374151;
+  --tab-bg: #1f2937;
+  --tab-active-bg: #374151;
+  --scrollbar-thumb: #4b5563;
+  --scrollbar-track: #1f2937;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  min-height: 450px;
+}
+
+#app {
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 10px;
+  border: 2px solid var(--scrollbar-track);
+}

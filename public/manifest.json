@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Gerador de Documentos",
+  "version": "1.0",
+  "description": "Gere CPF/CNPJ válidos e use o bloco de notas persistente.",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "vite.svg",
+    "48": "vite.svg",
+    "128": "vite.svg"
+  }
+}
