@@ -10,13 +10,16 @@
           <NoteIcon />
           <span>Notas</span>
         </button>
+        <button @click="activeTab = 'settings'" :class="{ active: activeTab === 'settings' }">
+          <SettingsIcon />
+        </button>
       </div>
-      <ThemeToggle />
     </header>
 
     <main class="app-main">
       <Generator v-if="activeTab === 'generator'" />
       <Notepad v-if="activeTab === 'notepad'" />
+      <Settings v-if="activeTab === 'settings'" />
     </main>
   </div>
 </template>
@@ -25,9 +28,10 @@
 import { useStorage } from './composables/useStorage';
 import Generator from './components/features/Generator.vue';
 import Notepad from './components/features/Notepad.vue';
-import ThemeToggle from './components/features/ThemeToggle.vue';
+import Settings from './components/features/Settings.vue';
 import IDIcon from './components/icons/IDIcon.vue';
 import NoteIcon from './components/icons/NoteIcon.vue';
+import SettingsIcon from './components/icons/SettingsIcon.vue';
 
 const activeTab = useStorage('active-tab', 'generator');
 </script>
