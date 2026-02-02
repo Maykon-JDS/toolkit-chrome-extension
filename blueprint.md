@@ -41,3 +41,7 @@ A aplicação foi refatorada para uma arquitetura baseada em componentes para ma
 5.  **Componente Principal (`App.vue`):**
     *   Integrar os componentes de funcionalidades (`Generator`, `Notepad`, `ThemeToggle`) em um layout com abas.
     *   Utilizar os componentes de UI para criar a estrutura das abas.
+
+# Histórico de Alterações
+
+*   Adicionado um título "Tema" à seção de configuração de tema na aba "Configurações".
