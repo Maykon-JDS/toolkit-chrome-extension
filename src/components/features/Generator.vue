@@ -13,6 +13,13 @@
       :generate="generateCNPJ"
       :copyToClipboard="copyToClipboard"
     />
+    <hr class="separator" />
+    <DocumentGenerator
+      title="Chave de NFe/CFe/MDFe"
+      :document="generatedNFeKey"
+      :generate="generateNFeKey"
+      :copyToClipboard="copyToClipboard"
+    />
     <div v-if="showNotification" class="notification">
       <p>{{ notificationMessage }}</p>
     </div>
@@ -21,11 +28,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { generateCPF as genCPF, generateCNPJ as genCNPJ } from '../../utils/documentUtils';
+import { generateCPF as genCPF, generateCNPJ as genCNPJ, generateNFeKey as genNFeKey } from '../../utils/documentUtils';
 import DocumentGenerator from './DocumentGenerator.vue';
 
 const generatedCPF = ref('');
 const generatedCNPJ = ref('');
+const generatedNFeKey = ref('');
 const notificationMessage = ref('');
 const showNotification = ref(false);
 
@@ -35,6 +43,10 @@ const generateCPF = () => {
 
 const generateCNPJ = () => {
   generatedCNPJ.value = genCNPJ();
+};
+
+const generateNFeKey = () => {
+  generatedNFeKey.value = genNFeKey();
 };
 
 const copyToClipboard = async (text: string, documentName: string) => {

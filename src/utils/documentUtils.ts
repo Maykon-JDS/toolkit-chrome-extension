@@ -53,4 +53,29 @@ function generateCNPJ() {
     return `${n1}${n2}.${n3}${n4}${n5}.${n6}${n7}${n8}/${n9}${n10}${n11}${n12}-${d1}${d2}`;
 }
 
-export { generateCPF, generateCNPJ };
+function generateNFeKey() {
+    let key = '';
+    for (let i = 0; i < 43; i++) {
+        key += random(9);
+    }
+
+    let sum = 0;
+    let weight = 2;
+    for (let i = 42; i >= 0; i--) {
+        sum += parseInt(key[i]) * weight;
+        weight++;
+        if (weight > 9) {
+            weight = 2;
+        }
+    }
+
+    const remainder = sum % 11;
+    let dv = 11 - remainder;
+    if (dv === 10 || dv === 11) {
+        dv = 0;
+    }
+
+    return key + dv.toString();
+}
+
+export { generateCPF, generateCNPJ, generateNFeKey };
