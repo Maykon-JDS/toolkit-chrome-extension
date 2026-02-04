@@ -4,13 +4,10 @@
     <div class="generator-container">
       <h3 class="generator-title">Gerador de CPF</h3>
       <div class="document-display">
-        <span class="document-text">{{ generatedCPF || 'Clique para gerar um CPF' }}</span>
+        <span class="document-text" @click="copyToClipboard(generatedCPF, 'CPF')">{{ generatedCPF || 'Clique para gerar um CPF' }}</span>
         <div class="button-group">
           <button @click="generateCPF" class="icon-button" aria-label="Gerar CPF">
             <IDIcon />
-          </button>
-          <button @click="copyCPF" class="icon-button" aria-label="Copiar CPF">
-            <CopyIcon />
           </button>
         </div>
       </div>
@@ -20,13 +17,10 @@
     <div class="generator-container">
       <h3 class="generator-title">Gerador de CNPJ</h3>
       <div class="document-display">
-        <span class="document-text">{{ generatedCNPJ || 'Clique para gerar um CNPJ' }}</span>
+        <span class="document-text" @click="copyToClipboard(generatedCNPJ, 'CNPJ')">{{ generatedCNPJ || 'Clique para gerar um CNPJ' }}</span>
         <div class="button-group">
           <button @click="generateCNPJ" class="icon-button" aria-label="Gerar CNPJ">
             <IDIcon />
-          </button>
-          <button @click="copyCNPJ" class="icon-button" aria-label="Copiar CNPJ">
-            <CopyIcon />
           </button>
         </div>
       </div>
@@ -41,7 +35,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { generateCPF as genCPF, generateCNPJ as genCNPJ } from '../../utils/documentUtils';
-import CopyIcon from '../icons/CopyIcon.vue';
 import IDIcon from '../icons/IDIcon.vue';
 
 const generatedCPF = ref('');
@@ -71,14 +64,6 @@ const copyToClipboard = async (text: string, documentName: string) => {
     showNotification.value = true;
     setTimeout(() => (showNotification.value = false), 2000);
   }
-};
-
-const copyCPF = () => {
-  copyToClipboard(generatedCPF.value, 'CPF');
-};
-
-const copyCNPJ = () => {
-  copyToClipboard(generatedCNPJ.value, 'CNPJ');
 };
 </script>
 
@@ -126,6 +111,12 @@ const copyCNPJ = () => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
+  user-select: none; /* Impede a seleção do texto ao clicar */
+}
+
+.document-text:hover {
+  color: var(--text-primary);
 }
 
 .button-group {
