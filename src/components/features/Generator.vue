@@ -1,31 +1,18 @@
 <template>
   <div class="generators-list">
-    <!-- CPF Generator -->
-    <div class="generator-container">
-      <h3 class="generator-title">Gerador de CPF</h3>
-      <div class="document-display">
-        <span class="document-text" @click="copyToClipboard(generatedCPF, 'CPF')">{{ generatedCPF || 'Clique para gerar um CPF' }}</span>
-        <div class="button-group">
-          <button @click="generateCPF" class="icon-button generate-button" aria-label="Gerar CPF">
-            <IDIcon />
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- CNPJ Generator -->
-    <div class="generator-container">
-      <h3 class="generator-title">Gerador de CNPJ</h3>
-      <div class="document-display">
-        <span class="document-text" @click="copyToClipboard(generatedCNPJ, 'CNPJ')">{{ generatedCNPJ || 'Clique para gerar um CNPJ' }}</span>
-        <div class="button-group">
-          <button @click="generateCNPJ" class="icon-button generate-button" aria-label="Gerar CNPJ">
-            <IDIcon />
-          </button>
-        </div>
-      </div>
-    </div>
-
+    <DocumentGenerator
+      title="CPF"
+      :document="generatedCPF"
+      :generate="generateCPF"
+      :copyToClipboard="copyToClipboard"
+    />
+    <hr class="separator" />
+    <DocumentGenerator
+      title="CNPJ"
+      :document="generatedCNPJ"
+      :generate="generateCNPJ"
+      :copyToClipboard="copyToClipboard"
+    />
     <div v-if="showNotification" class="notification">
       <p>{{ notificationMessage }}</p>
     </div>
@@ -35,7 +22,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { generateCPF as genCPF, generateCNPJ as genCNPJ } from '../../utils/documentUtils';
-import IDIcon from '../icons/IDIcon.vue';
+import DocumentGenerator from './DocumentGenerator.vue';
 
 const generatedCPF = ref('');
 const generatedCNPJ = ref('');
@@ -71,85 +58,15 @@ const copyToClipboard = async (text: string, documentName: string) => {
 .generators-list {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   padding-top: 1.5rem;
 }
 
-.generator-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.generator-title {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.document-display {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  background-color: var(--tab-bg);
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  width: 100%;
-  min-height: 2.5rem;
-  box-sizing: border-box;
-}
-
-.document-text {
-  font-family: 'monospace';
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  flex-grow: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  user-select: none; /* Impede a seleção do texto ao clicar */
-  padding-right: 1rem;
-}
-
-.document-text:hover {
-  color: var(--text-primary);
-}
-
-.button-group {
-  display: flex;
-  align-items: center;
-  border-left: 1px solid var(--border);
-  padding-left: 1rem;
-}
-
-.icon-button {
-  background: none;
+.separator {
   border: none;
-  cursor: pointer;
-  color: var(--icon-color);
-  padding: 0.5rem;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s;
-}
-
-.icon-button:hover {
-  background-color: var(--icon-hover-bg);
-}
-
-.generate-button {
-  background-color: var(--primary);
-  color: #ffffff;
-}
-
-.generate-button:hover {
-  background-color: var(--primary-hover);
+  height: 1px;
+  background-color: var(--border);
+  margin: 0.5rem 0;
 }
 
 .notification {
