@@ -49,3 +49,5 @@ A aplicação foi refatorada para uma arquitetura baseada em componentes para ma
 *   Refatorado o componente `Generator.vue` para separar os geradores de CPF e CNPJ em duas seções distintas, com títulos individuais e listados verticalmente.
 *   Removida a funcionalidade de copiar o conteúdo do input através de um botão de cópia e adicionada a funcionalidade de copiar ao clicar diretamente no input.
 *   Removido o componente `CopyIcon.vue`, que não é mais necessário.
+*   Adicionado um separador vertical entre o texto do documento e o botão de gerar para melhor distinção visual.
+*   O botão de gerar agora tem uma cor de fundo de destaque para melhorar a usabilidade, com a cor do ícone ajustada para branco para garantir o contraste.

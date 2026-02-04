@@ -6,7 +6,7 @@
       <div class="document-display">
         <span class="document-text" @click="copyToClipboard(generatedCPF, 'CPF')">{{ generatedCPF || 'Clique para gerar um CPF' }}</span>
         <div class="button-group">
-          <button @click="generateCPF" class="icon-button" aria-label="Gerar CPF">
+          <button @click="generateCPF" class="icon-button generate-button" aria-label="Gerar CPF">
             <IDIcon />
           </button>
         </div>
@@ -19,7 +19,7 @@
       <div class="document-display">
         <span class="document-text" @click="copyToClipboard(generatedCNPJ, 'CNPJ')">{{ generatedCNPJ || 'Clique para gerar um CNPJ' }}</span>
         <div class="button-group">
-          <button @click="generateCNPJ" class="icon-button" aria-label="Gerar CNPJ">
+          <button @click="generateCNPJ" class="icon-button generate-button" aria-label="Gerar CNPJ">
             <IDIcon />
           </button>
         </div>
@@ -136,10 +136,20 @@ const copyToClipboard = async (text: string, documentName: string) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s;
 }
 
 .icon-button:hover {
   background-color: var(--icon-hover-bg);
+}
+
+.generate-button {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.generate-button:hover {
+  background-color: var(--primary-hover);
 }
 
 .notification {
