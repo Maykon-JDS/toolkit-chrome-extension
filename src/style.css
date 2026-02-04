@@ -34,8 +34,8 @@ body {
   color: var(--text-primary);
   margin: 0;
   padding: 0;
-  width: 400px;
-  min-height: 450px;
+  width: 350px;
+  height: 500px;
 }
 
 #app {

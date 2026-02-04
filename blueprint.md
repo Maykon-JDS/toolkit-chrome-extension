@@ -45,3 +45,4 @@ A aplicação foi refatorada para uma arquitetura baseada em componentes para ma
 # Histórico de Alterações
 
 *   Adicionado um título "Tema" à seção de configuração de tema na aba "Configurações".
+*   Definido o tamanho padrão da janela da extensão para `350px` de largura e `500px` de altura para uma melhor experiência de usuário.
