@@ -100,7 +100,6 @@ const copyToClipboard = async (text: string, documentName: string) => {
   width: 100%;
   min-height: 2.5rem;
   box-sizing: border-box;
-  gap: 0.5rem;
 }
 
 .document-text {
@@ -113,6 +112,7 @@ const copyToClipboard = async (text: string, documentName: string) => {
   text-overflow: ellipsis;
   cursor: pointer;
   user-select: none; /* Impede a seleção do texto ao clicar */
+  padding-right: 1rem;
 }
 
 .document-text:hover {
@@ -122,7 +122,8 @@ const copyToClipboard = async (text: string, documentName: string) => {
 .button-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  border-left: 1px solid var(--border);
+  padding-left: 1rem;
 }
 
 .icon-button {
