@@ -46,3 +46,4 @@ A aplicação foi refatorada para uma arquitetura baseada em componentes para ma
 
 *   Adicionado um título "Tema" à seção de configuração de tema na aba "Configurações".
 *   Definido o tamanho padrão da janela da extensão para `350px` de largura e `500px` de altura para uma melhor experiência de usuário.
+*   Refatorado o componente `Generator.vue` para separar os geradores de CPF e CNPJ em duas seções distintas, com títulos individuais e listados verticalmente.

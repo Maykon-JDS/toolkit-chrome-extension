@@ -1,15 +1,37 @@
 <template>
-  <div class="generator-container">
-    <div class="document-display">
-      <span class="document-text">{{ generatedDocument || placeholder }}</span>
-      <button @click="copyToClipboard" class="icon-button" :aria-label="CopyAriaLabel">
-        <CopyIcon />
-      </button>
+  <div class="generators-list">
+    <!-- CPF Generator -->
+    <div class="generator-container">
+      <h3 class="generator-title">Gerador de CPF</h3>
+      <div class="document-display">
+        <span class="document-text">{{ generatedCPF || 'Clique para gerar um CPF' }}</span>
+        <div class="button-group">
+          <button @click="generateCPF" class="icon-button" aria-label="Gerar CPF">
+            <IDIcon />
+          </button>
+          <button @click="copyCPF" class="icon-button" aria-label="Copiar CPF">
+            <CopyIcon />
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="actions">
-      <button @click="generateCPF" class="generate-button">Gerar CPF</button>
-      <button @click="generateCNPJ" class="generate-button">Gerar CNPJ</button>
+
+    <!-- CNPJ Generator -->
+    <div class="generator-container">
+      <h3 class="generator-title">Gerador de CNPJ</h3>
+      <div class="document-display">
+        <span class="document-text">{{ generatedCNPJ || 'Clique para gerar um CNPJ' }}</span>
+        <div class="button-group">
+          <button @click="generateCNPJ" class="icon-button" aria-label="Gerar CNPJ">
+            <IDIcon />
+          </button>
+          <button @click="copyCNPJ" class="icon-button" aria-label="Copiar CNPJ">
+            <CopyIcon />
+          </button>
+        </div>
+      </div>
     </div>
+
     <div v-if="showNotification" class="notification">
       <p>{{ notificationMessage }}</p>
     </div>
@@ -17,52 +39,69 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { generateCPF as genCPF, generateCNPJ as genCNPJ } from '../../utils/documentUtils';
 import CopyIcon from '../icons/CopyIcon.vue';
+import IDIcon from '../icons/IDIcon.vue';
 
-const generatedDocument = ref('');
+const generatedCPF = ref('');
+const generatedCNPJ = ref('');
 const notificationMessage = ref('');
 const showNotification = ref(false);
-const documentType = ref('');
-
-const placeholder = computed(() => `Clique para gerar um ${documentType.value || 'documento'}`);
-const CopyAriaLabel = computed(() => `Copiar ${documentType.value || 'documento'}`);
 
 const generateCPF = () => {
-  generatedDocument.value = genCPF();
-  documentType.value = 'CPF';
+  generatedCPF.value = genCPF();
 };
 
 const generateCNPJ = () => {
-  generatedDocument.value = genCNPJ();
-  documentType.value = 'CNPJ';
+  generatedCNPJ.value = genCNPJ();
 };
 
-const copyToClipboard = async () => {
-  if (!generatedDocument.value) return;
+const copyToClipboard = async (text: string, documentName: string) => {
+  if (!text) return;
 
   try {
-    await navigator.clipboard.writeText(generatedDocument.value);
+    await navigator.clipboard.writeText(text);
+    notificationMessage.value = `${documentName} copiado para a área de transferência!`;
     showNotification.value = true;
-    notificationMessage.value = `${documentType.value} copiado para a área de transferência!`;
     setTimeout(() => (showNotification.value = false), 2000);
   } catch (err) {
-    console.error('Falha ao copiar: ', err);
+    console.error(`Falha ao copiar ${documentName}: `, err);
+    notificationMessage.value = `Falha ao copiar o ${documentName}.`;
     showNotification.value = true;
-    notificationMessage.value = `Falha ao copiar o ${documentType.value}.`;
     setTimeout(() => (showNotification.value = false), 2000);
   }
+};
+
+const copyCPF = () => {
+  copyToClipboard(generatedCPF.value, 'CPF');
+};
+
+const copyCNPJ = () => {
+  copyToClipboard(generatedCNPJ.value, 'CNPJ');
 };
 </script>
 
 <style scoped>
+.generators-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: 1.5rem;
+}
+
 .generator-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.generator-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
 }
 
 .document-display {
@@ -76,6 +115,7 @@ const copyToClipboard = async () => {
   width: 100%;
   min-height: 2.5rem;
   box-sizing: border-box;
+  gap: 0.5rem;
 }
 
 .document-text {
@@ -83,6 +123,15 @@ const copyToClipboard = async () => {
   font-size: 1.1rem;
   color: var(--text-secondary);
   flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .icon-button {
@@ -92,31 +141,13 @@ const copyToClipboard = async () => {
   color: var(--icon-color);
   padding: 0.5rem;
   border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-button:hover {
   background-color: var(--icon-hover-bg);
-}
-
-.actions {
-  display: flex;
-  gap: 1rem;
-}
-
-.generate-button {
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.generate-button:hover {
-  background-color: var(--primary-hover);
 }
 
 .notification {
