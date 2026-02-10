@@ -62,7 +62,7 @@ function generateNFeKey() {
     let sum = 0;
     let weight = 2;
     for (let i = 42; i >= 0; i--) {
-        sum += parseInt(key[i]) * weight;
+        sum += parseInt(key[i]!) * weight;
         weight++;
         if (weight > 9) {
             weight = 2;
