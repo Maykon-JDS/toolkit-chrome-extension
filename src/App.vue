@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import { useStorage } from './composables/useStorage';
+import { useTheme } from './composables/useTheme';
 import Generator from './components/features/Generator.vue';
 import Notepad from './components/features/Notepad.vue';
 import Settings from './components/features/Settings.vue';
@@ -34,6 +35,7 @@ import NoteIcon from './components/icons/NoteIcon.vue';
 import SettingsIcon from './components/icons/SettingsIcon.vue';
 
 const activeTab = useStorage('active-tab', 'generator');
+const { theme } = useTheme();
 </script>
 
 <style scoped>
