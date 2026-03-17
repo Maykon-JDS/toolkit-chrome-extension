@@ -1,5 +1,7 @@
 import { ref, onMounted, watch } from 'vue';
 
+declare const chrome: any;
+
 export function useTheme() {
   const theme = ref<string>('system');
   const isLoaded = ref(false);
@@ -27,12 +29,12 @@ export function useTheme() {
     
     // Tentar carregar do chrome.storage primeiro
     if (typeof chrome !== 'undefined' && chrome.storage) {
-      const result = await new Promise((resolve) => {
-        chrome.storage.local.get('theme', (items) => {
+      const result = await new Promise((resolve: (value: string) => void) => {
+        chrome.storage.local.get('theme', (items: any) => {
           resolve(items.theme || localStorage.getItem('theme') || 'system');
         });
       });
-      savedTheme = result as string;
+      savedTheme = result;
     } else {
       // Fallback para localStorage
       savedTheme = localStorage.getItem('theme') || 'system';

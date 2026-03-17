@@ -35,7 +35,7 @@ import NoteIcon from './components/icons/NoteIcon.vue';
 import SettingsIcon from './components/icons/SettingsIcon.vue';
 
 const activeTab = useStorage('active-tab', 'generator');
-const { theme } = useTheme();
+useTheme();
 </script>
 
 <style scoped>
