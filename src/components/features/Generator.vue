@@ -187,6 +187,9 @@ function isPinnedDivider(index: number): boolean {
   if (!hasPinnedTools.value) return false;
   const currentTool = sortedTools.value[index];
   const prevTool = sortedTools.value[index - 1];
+  
+  if (!currentTool || !prevTool) return false;
+  
   return !isPinned(currentTool.id) && isPinned(prevTool.id);
 }
 
