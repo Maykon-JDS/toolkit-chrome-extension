@@ -1,6 +1,17 @@
 <template>
-  <div class="generator-container">
-    <h3 class="generator-title">{{ title }}</h3>
+  <div class="generator-container" :class="{ 'is-pinned': pinned }">
+    <div class="generator-header">
+      <h3 class="generator-title">{{ title }}</h3>
+      <button
+        v-if="!hidePin"
+        class="pin-button"
+        :class="{ active: pinned }"
+        :aria-label="pinned ? `Desafixar ${title}` : `Fixar ${title}`"
+        @click="$emit('toggle-pin')"
+      >
+        <PinIcon :pinned="pinned" />
+      </button>
+    </div>
     <div class="document-display">
       <span class="document-text" @click="copyToClipboard(document, title)">{{ document || `Clique para gerar um ${title}` }}</span>
       <div class="button-group">
@@ -15,12 +26,19 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
 import IDIcon from '../icons/IDIcon.vue';
+import PinIcon from '../icons/PinIcon.vue';
 
 const props = defineProps<{
   title: string;
   document: string;
+  pinned?: boolean;
+  hidePin?: boolean;
   generate: () => void;
   copyToClipboard: (text: string, documentName: string) => void;
+}>();
+
+defineEmits<{
+  'toggle-pin': [];
 }>();
 
 const { title, document, generate, copyToClipboard } = toRefs(props);
@@ -37,6 +55,19 @@ const { title, document, generate, copyToClipboard } = toRefs(props);
   border-radius: 0.75rem;
   border: 1px solid var(--border);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.generator-container.is-pinned {
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.generator-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .generator-title {
@@ -44,6 +75,30 @@ const { title, document, generate, copyToClipboard } = toRefs(props);
   font-weight: 500;
   color: var(--text-primary);
   margin: 0;
+}
+
+.pin-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--icon-color);
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.5;
+}
+
+.pin-button:hover {
+  background-color: var(--icon-hover-bg);
+  opacity: 1;
+}
+
+.pin-button.active {
+  opacity: 1;
+  color: var(--primary);
 }
 
 .document-display {
