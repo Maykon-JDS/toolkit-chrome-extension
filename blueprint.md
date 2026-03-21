@@ -52,3 +52,4 @@ A aplicação foi refatorada para uma arquitetura baseada em componentes para ma
 *   Adicionado um separador vertical entre o texto do documento e o botão de gerar para melhor distinção visual.
 *   O botão de gerar agora tem uma cor de fundo de destaque para melhorar a usabilidade, com a cor do ícone ajustada para branco para garantir o contraste.
 *   Implementada a funcionalidade de "Fixar Ferramentas" (📌) no topo: permite aos usuários marcar as ferramentas mais usadas (CPF, CNPJ, Chave NFe) para o topo da lista. O estado de fixação é persistido no localStorage usando o composable `usePinnedTools.ts`, mantendo as ferramentas favoritas sempre acessíveis mesmo após reiniciar a extensão.
+*   Resolvido o erro "Não foi possível decodificar a imagem: 'vite.svg'" atualizando o `manifest.json` para utilizar ícones nos formatos PNG.
