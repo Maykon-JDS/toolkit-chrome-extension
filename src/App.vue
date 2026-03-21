@@ -135,20 +135,4 @@ function selectTab(tab: string) {
 .app-main {
   flex-grow: 1;
 }
-
-:deep(.p-sidebar) {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.2);
-}
-:deep(.p-sidebar-header) {
-  padding: 1rem;
-  border-bottom: 1px solid var(--border);
-}
-:deep(.p-sidebar-close) {
-  color: var(--text-primary);
-}
-:deep(.p-sidebar-content) {
-  padding: 1rem;
-}
 </style>

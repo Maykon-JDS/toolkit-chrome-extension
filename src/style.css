@@ -61,3 +61,24 @@ body {
   border-radius: 10px;
   border: 2px solid var(--scrollbar-track);
 }
+
+/* PrimeVue Sidebar Global Theme Overrides */
+.p-sidebar {
+  background-color: var(--background) !important;
+  color: var(--text-primary) !important;
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.2) !important;
+  border-left: 1px solid var(--border) !important;
+}
+
+.p-sidebar-header {
+  padding: 1rem !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.p-sidebar-close {
+  color: var(--text-primary) !important;
+}
+
+.p-sidebar-content {
+  padding: 1rem !important;
+}
