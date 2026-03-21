@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Toolkit do Programador",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Um toolkit (ferramentário) completo com utilitários essenciais para o dia a dia de programadores.",
   "permissions": ["storage"],
   "action": {
