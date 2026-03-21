@@ -12,6 +12,8 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "primeicons": "^7.0.0",
+    "primevue": "^3.53.1",
     "vue": "^3.5.24"
   },
   "devDependencies": {
