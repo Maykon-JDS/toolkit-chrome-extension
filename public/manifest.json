@@ -1,15 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Toolkit do Programador",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Um toolkit (ferramentário) completo com utilitários essenciais para o dia a dia de programadores.",
   "permissions": ["storage"],
   "action": {
     "default_popup": "index.html"
   },
   "icons": {
-    "16": "vite.svg",
-    "48": "vite.svg",
-    "128": "vite.svg"
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
   }
 }
