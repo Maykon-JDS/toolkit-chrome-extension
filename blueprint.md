@@ -1,6 +1,6 @@
 # Visão Geral do Projeto
 
-Esta é uma extensão do Chrome desenvolvida para auxiliar desenvolvedores e testadores, fornecendo uma ferramenta rápida para gerar números de CPF e CNPJ brasileiros válidos. Inclui também um bloco de notas com salvamento automático e uma interface moderna com temas claro e escuro.
+Esta extensão é um toolkit (ferramentário) desenvolvido para auxiliar no dia a dia de programadores. Ela centraliza diversas ferramentas úteis, como gerador rápido de CPF e CNPJ, bloco de notas com salvamento automático e acesso rápido a utilitários essenciais, tudo em uma interface moderna com temas claro e escuro.
 
 # Arquitetura de Componentes
 

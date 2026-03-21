@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Gerador de Documentos",
-  "version": "1.0",
-  "description": "Gere CPF/CNPJ válidos e use o bloco de notas persistente.",
+  "name": "Toolkit do Programador",
+  "version": "0.4.0",
+  "description": "Um toolkit (ferramentário) completo com utilitários essenciais para o dia a dia de programadores.",
   "permissions": ["storage"],
   "action": {
     "default_popup": "index.html"
