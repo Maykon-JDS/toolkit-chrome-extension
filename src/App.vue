@@ -1,20 +1,31 @@
 <template>
   <div id="app-container">
     <header class="app-header">
-      <div class="tabs">
-        <button @click="activeTab = 'generator'" :class="{ active: activeTab === 'generator' }">
+      <div class="header-title">
+        <span>Ferramentas</span>
+      </div>
+      <button class="hamburger-menu" @click="sidebarVisible = true">
+        <i class="pi pi-bars"></i>
+      </button>
+    </header>
+
+    <Sidebar v-model:visible="sidebarVisible" position="right" class="extension-sidebar">
+      <h2>Menu</h2>
+      <div class="sidebar-links">
+        <button @click="selectTab('generator')" :class="{ active: activeTab === 'generator' }">
           <IDIcon />
           <span>Gerador</span>
         </button>
-        <button @click="activeTab = 'notepad'" :class="{ active: activeTab === 'notepad' }">
+        <button @click="selectTab('notepad')" :class="{ active: activeTab === 'notepad' }">
           <NoteIcon />
           <span>Notas</span>
         </button>
-        <button @click="activeTab = 'settings'" :class="{ active: activeTab === 'settings' }">
+        <button @click="selectTab('settings')" :class="{ active: activeTab === 'settings' }">
           <SettingsIcon />
+          <span>Configurações</span>
         </button>
       </div>
-    </header>
+    </Sidebar>
 
     <main class="app-main">
       <Generator v-if="activeTab === 'generator'" />
@@ -25,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useStorage } from './composables/useStorage';
 import { useTheme } from './composables/useTheme';
 import Generator from './components/features/Generator.vue';
@@ -33,9 +45,17 @@ import Settings from './components/features/Settings.vue';
 import IDIcon from './components/icons/IDIcon.vue';
 import NoteIcon from './components/icons/NoteIcon.vue';
 import SettingsIcon from './components/icons/SettingsIcon.vue';
+import Sidebar from 'primevue/sidebar';
 
 const activeTab = useStorage('active-tab', 'generator');
+const sidebarVisible = ref(false);
+
 useTheme();
+
+function selectTab(tab: string) {
+  activeTab.value = tab;
+  sidebarVisible.value = false;
+}
 </script>
 
 <style scoped>
@@ -54,39 +74,60 @@ useTheme();
   border-bottom: 1px solid var(--border);
 }
 
-.tabs {
-  display: flex;
-  gap: 0.5rem;
-  background-color: var(--tab-bg);
-  border-radius: 0.5rem;
-  padding: 0.5rem;
+.header-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-primary);
 }
 
-.tabs button {
+.hamburger-menu {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s;
+}
+
+.hamburger-menu:hover {
+  background-color: var(--icon-hover-bg);
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.sidebar-links button {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
   border: none;
   background-color: transparent;
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   border-radius: 0.375rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  text-align: left;
 }
 
-.tabs button:hover {
+.sidebar-links button:hover {
   background-color: var(--icon-hover-bg);
 }
 
-.tabs button.active {
+.sidebar-links button.active {
   background-color: var(--tab-active-bg);
   color: var(--text-primary);
 }
 
-.tabs button svg {
+.sidebar-links button svg {
   width: 1.25rem;
   height: 1.25rem;
 }
